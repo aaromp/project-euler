@@ -16,10 +16,10 @@ const int NUM_MONTHS = 12;
 const int NUM_DAYS_IN_A_WEEK = 7;
 
 bool isLeapYear(int year) {
-    // a lear year can't be a century unless it's divisible by 400
+    // a leap year can't be a century unless it's divisible by 400
     if (year % 100 == 0 && year % 400 != 0) return false;
     
-    // a leap year must be divisble by a number other than 4
+    // a leap year must not be divisble by a number other than 4
     if (year % 4 != 0) return false;
     
     // it the above don't apply, it's a leap year
@@ -29,7 +29,8 @@ bool isLeapYear(int year) {
 
 int getNumDays(int month, int year) {
     switch (month) {
-        case 2: return isLeapYear(year) ? 29 : 28;
+        case 2: 
+						return isLeapYear(year) ? 29 : 28;
             
         case 4: case 6: case 9: case 11:
             return 30;
@@ -44,14 +45,12 @@ int main() {
     int result = 0;
     
     int daysElapsed = 0;
-    for (int year = START_YEAR; year <= END_YEAR; year++) {
-        for (int month = 1; month <= NUM_MONTHS; month++) {
+    for (int year = START_YEAR; year <= END_YEAR; year++)
+        for (int month = 1; month <= NUM_MONTHS; month++)
             for (int day = 1; day <= getNumDays(month, year); day++) {
                 daysElapsed++;
                 if (year > START_YEAR && day == 1 && daysElapsed % NUM_DAYS_IN_A_WEEK == 0) result++;
             }
-        }
-    }
     
     cout << result << endl;
 
